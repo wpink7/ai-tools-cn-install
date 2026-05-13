@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Tools CN Install</title>
+  <meta name="description" content="国内网络环境下快速安装 Node.js 24、Claude Code、Codex 和 OpenCode。">
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #fff;
+      --text: #172033;
+      --muted: #637083;
+      --line: #d9e0ea;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --code: #111827;
+      --code-text: #e5e7eb;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      width: min(980px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 36px 0 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 6vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    nav {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a,
+    .link-btn {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      padding: 7px 12px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .link-btn.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    section {
+      margin: 16px 0;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .box {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .box.full { grid-column: 1 / -1; }
+
+    .box-head {
+      min-height: 50px;
+      padding: 11px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfe;
+    }
+
+    .box-title strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .box-title span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .copy {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      padding: 7px 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .copy.done {
+      color: var(--accent-dark);
+      border-color: var(--accent);
+      background: #e6f4f1;
+    }
+
+    pre {
+      margin: 0;
+      padding: 15px;
+      overflow-x: auto;
+      background: var(--code);
+      color: var(--code-text);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    code {
+      font-family: "Cascadia Code", Consolas, monospace;
+    }
+
+    .downloads {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 8px 0 14px;
+    }
+
+    .note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 22px 0 38px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      section { padding: 16px; }
+      .link-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>AI Tools CN Install</h1>
+      <p class="lead">国内网络环境下，最简单地安装 Node.js 24、Claude Code、Codex 和 OpenCode。</p>
+      <nav>
+        <a href="#node">Node.js 24</a>
+        <a href="#tools">AI CLI</a>
+        <a href="#config">配置样例</a>
+        <a href="#links">镜像链接</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="node">
+        <h2>1. 安装 Node.js 24</h2>
+        <p>Linux / macOS 用 nvm，Windows 直接下载 Node.js 24 安装包。核心是走国内镜像。</p>
+
+        <div class="grid">
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Linux / macOS</strong>
+                <span>nvm + 国内 Node 镜像</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>git clone https://gitee.com/mirrors/nvm.git ~/.nvm
+cd ~/.nvm
+bash install.sh
+
+cat >> ~/.bashrc &lt;&lt;'EOF'
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] &amp;&amp; \. "$NVM_DIR/bash_completion"
+export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node/
+EOF
+
+source ~/.bashrc
+nvm install 24
+nvm use 24
+npm config set registry https://registry.npmmirror.com
+node -v
+npm -v</code></pre>
+          </article>
+
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>macOS zsh</strong>
+                <span>如果你用 zsh，复制这段追加配置</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>cat >> ~/.zshrc &lt;&lt;'EOF'
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] &amp;&amp; \. "$NVM_DIR/bash_completion"
+export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node/
+EOF
+
+source ~/.zshrc
+nvm install 24
+nvm use 24</code></pre>
+          </article>
+
+          <article class="box full">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Windows</strong>
+                <span>先装 Git，再装 Node.js 24</span>
+              </div>
+            </div>
+            <div style="padding: 14px;">
+              <div class="downloads">
+                <a class="link-btn primary" href="https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/LatestRelease/Git-2.54.0-64-bit.exe" target="_blank" rel="noreferrer">下载 Git 64-bit</a>
+                <a class="link-btn primary" href="https://registry.npmmirror.com/-/binary/node/latest-v24.x/node-v24.9.0-x64.msi" target="_blank" rel="noreferrer">下载 Node.js 24 x64</a>
+              </div>
+              <p class="note">安装完成后重新打开 PowerShell，再执行下面这段。</p>
+            </div>
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Windows npm 镜像</strong>
+                <span>PowerShell</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>npm config set registry https://registry.npmmirror.com
+node -v
+npm -v
+git --version</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools">
+        <h2>2. 安装 AI CLI</h2>
+        <p>Node.js 24 和 npm 镜像配置好之后，复制下面命令安装。</p>
+
+        <div class="grid">
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Claude Code</strong>
+                <span>官方脚本或 npm</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code># Linux / macOS / WSL
+curl -fsSL https://claude.ai/install.sh | bash
+
+# Windows PowerShell
+irm https://claude.ai/install.ps1 | iex
+
+# 也可以用 npm 安装
+npm i -g @anthropic-ai/claude-code</code></pre>
+          </article>
+
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Codex / OpenCode</strong>
+                <span>npm 安装</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>npm i -g @openai/codex
+npm i -g opencode-ai
+
+codex --version
+opencode --version</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="config">
+        <h2>3. 配置样例</h2>
+        <p>Claude Code 和 Codex 的常用配置示例。</p>
+
+        <div class="grid">
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Claude Code settings.json</strong>
+                <span>放到 Claude 配置目录</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "sk-your-token",
+    "ANTHROPIC_BASE_URL": "https://awesome-token.com"
+  },
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "superpowers@claude-plugins-official": false
+  },
+  "extraKnownMarketplaces": {
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    }
+  },
+  "skipWebFetchPreflight": true,
+  "autoCompactEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "alwaysThinkingEnabled": true
+}</code></pre>
+          </article>
+
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Codex config.toml</strong>
+                <span>来自本地 codex/config.toml，已脱敏</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>personality = "pragmatic"
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+model_provider = "awe"
+approvals_reviewer = "user"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[model_providers.awe]
+name = "awe"
+base_url = "https://awesome-token.com/v1"
+wire_api = "responses"
+requires_openai_auth = true
+
+[notice]
+hide_full_access_warning = true</code></pre>
+          </article>
+
+          <article class="box full">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>危险模式 / YOLO</strong>
+                <span>只在可信目录或隔离环境使用</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code># Claude Code 跳过权限确认
+claude --dangerously-skip-permissions
+
+# Codex 临时跳过确认和沙箱
+codex --dangerously-bypass-approvals-and-sandbox
+
+# Codex 写进 config.toml 的等效配置
+approval_policy = "never"
+sandbox_mode = "danger-full-access"</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="links">
+        <h2>镜像链接</h2>
+        <p>备用入口，优先放可读页面；Windows 上方按钮是直接下载链接。</p>
+        <div class="downloads">
+          <a class="link-btn" href="https://npmmirror.com/mirrors/node/" target="_blank" rel="noreferrer">Node 镜像目录</a>
+          <a class="link-btn" href="https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/LatestRelease/" target="_blank" rel="noreferrer">清华 Git for Windows 目录</a>
+          <a class="link-btn" href="https://npmmirror.com/" target="_blank" rel="noreferrer">npmmirror 官网</a>
+          <a class="link-btn" href="https://gitee.com/mirrors/nvm" target="_blank" rel="noreferrer">Gitee nvm 镜像</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      MIT License. Node.js 24 当前示例使用 v24.9.0；后续可按镜像目录更新到新版 24.x。
+    </footer>
+  </div>
+
+  <script>
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+
+    document.querySelectorAll(".copy").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const box = button.closest(".box");
+        const code = box.querySelector("code").innerText;
+        await copyText(code);
+        button.textContent = "已复制";
+        button.classList.add("done");
+        setTimeout(() => {
+          button.textContent = "复制";
+          button.classList.remove("done");
+        }, 1400);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Local tool credentials and machine-specific settings
+codex/auth.json
+codex/config.toml
+settings.json
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

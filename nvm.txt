@@ -1,0 +1,38 @@
+# 使用 curl
+curl -o- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash
+
+# 或者使用 wget (和你的原始命令风格一致)
+wget -qO- https://gitee.com/mirrors/nvm/raw/master/install.sh | bash
+
+# 1. 克隆仓库到本地
+git clone https://gitee.com/mirrors/nvm.git ~/.nvm
+# 2. 进入目录并执行安装脚本
+cd ~/.nvm
+./install.sh
+# 3. 手动配置环境变量 (将以下内容添加到 ~/.bashrc 或 ~/.zshrc 文件中)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 加载 nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # 加载 nvm 自动补全
+# 4. 使配置生效
+source ~/.bashrc
+
+来自 <https://chat.deepseek.com/a/chat/s/63ace09a-fbb4-4f4a-bb67-1e852cc54b9a> 
+
+# 设置 Node.js 镜像为淘宝源
+nvm node_mirror https://npmmirror.com/mirrors/node/
+
+npm config set registry https://registry.npmmirror.com
+
+
+安装 claude code
+打开命令提示符 (CMD) 或 PowerShell，运行：
+npm install -g @anthropic-ai/claude-code
+
+安装 codex
+打开命令提示符 (CMD) 或 PowerShell，运行：
+npm install -g @openai/codex
+
+
+安装 OpenCode
+可通过下面的 NPM 命令安装 OpenCode 官方 CLI 程序
+npm i -g opencode-ai@latest
