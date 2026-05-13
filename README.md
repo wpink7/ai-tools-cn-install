@@ -1,4 +1,4 @@
-# AI Tools CN Install
+# AI 开发工具国内安装指南
 
 国内网络环境下快速安装 AI 开发工具的指南，提供 Node.js 24、Claude Code、Codex、OpenCode 的最短安装路径。
 
