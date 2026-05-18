@@ -1,6 +1,6 @@
 # AI 开发工具国内安装指南
 
-国内网络环境下快速安装 AI 开发工具的指南，提供 Node.js 24、Claude Code、Codex、OpenCode 的最短安装路径。
+国内网络环境下快速安装 AI 开发工具的指南，提供 Node.js 24、Claude Code、Codex、OpenClaw 的最短安装路径。
 
 ## 在线页面
 
@@ -15,7 +15,7 @@
 - Linux / macOS 使用 nvm 安装 Node.js 24
 - Windows 使用清华镜像下载 Git 和 Node.js 24
 - npm 国内镜像配置
-- Claude Code、Codex、OpenCode 安装命令
+- Claude Code、Codex、OpenClaw 安装命令
 - Claude Code 和 Codex 常用提示词样例
 
 ## License

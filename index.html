@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI 开发工具国内安装指南</title>
-  <meta name="description" content="国内网络环境下快速安装 Node.js 24、Claude Code、Codex 和 OpenCode。">
+  <meta name="description" content="国内网络环境下快速安装 Node.js 24、Claude Code、Codex 和 OpenClaw。">
   <style>
     :root {
       --bg: #f6f7f9;
@@ -196,7 +196,7 @@
   <div class="wrap">
     <header>
       <h1>AI 开发工具国内安装指南</h1>
-      <p class="lead">国内网络环境下，最简单地安装 Node.js 24、Claude Code、Codex 和 OpenCode。</p>
+      <p class="lead">国内网络环境下，最简单地安装 Node.js 24、Claude Code、Codex 和 OpenClaw。</p>
       <nav>
         <a href="#node">Node.js 24</a>
         <a href="#tools">AI CLI</a>
@@ -313,16 +313,20 @@ npm i -g @anthropic-ai/claude-code</code></pre>
           <article class="box">
             <div class="box-head">
               <div class="box-title">
-                <strong>Codex / OpenCode</strong>
-                <span>npm 安装</span>
+                <strong>Codex / OpenClaw</strong>
+                <span>npm 安装，OpenClaw 安装后配置</span>
               </div>
               <button class="copy" type="button">复制</button>
             </div>
             <pre><code>npm i -g @openai/codex
-npm i -g opencode-ai
+npm install -g openclaw@latest
+
+# OpenClaw 配置
+openclaw onboard --install-daemon
+openclaw config
 
 codex --version
-opencode --version</code></pre>
+openclaw --version</code></pre>
           </article>
         </div>
       </section>

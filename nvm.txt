@@ -33,6 +33,10 @@ npm install -g @anthropic-ai/claude-code
 npm install -g @openai/codex
 
 
-安装 OpenCode
-可通过下面的 NPM 命令安装 OpenCode 官方 CLI 程序
-npm i -g opencode-ai@latest
+安装 OpenClaw
+可通过下面的 NPM 命令安装 OpenClaw 官方 CLI 程序
+npm install -g openclaw@latest
+
+配置 OpenClaw
+openclaw onboard --install-daemon
+openclaw config
