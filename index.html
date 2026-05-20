@@ -270,8 +270,16 @@ nvm use 24</code></pre>
                 <a class="link-btn primary" href="https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/LatestRelease/Git-2.54.0-64-bit.exe" target="_blank" rel="noreferrer">下载 Git 64-bit</a>
                 <a class="link-btn primary" href="https://registry.npmmirror.com/-/binary/node/latest-v24.x/node-v24.9.0-x64.msi" target="_blank" rel="noreferrer">下载 Node.js 24 x64</a>
               </div>
-              <p class="note">安装完成后重新打开 PowerShell，再执行下面这段。</p>
+              <p class="note">安装完成后重新打开 PowerShell，再执行下面这段。如果 PowerShell 提示脚本执行被禁止，先复制下面这条命令。</p>
             </div>
+            <div class="box-head">
+              <div class="box-title">
+                <strong>Windows 执行策略</strong>
+                <span>PowerShell</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
             <div class="box-head">
               <div class="box-title">
                 <strong>Windows npm 镜像</strong>
@@ -296,36 +304,43 @@ git --version</code></pre>
             <div class="box-head">
               <div class="box-title">
                 <strong>Claude Code</strong>
-                <span>官方脚本或 npm</span>
+                <span>npm 安装</span>
               </div>
               <button class="copy" type="button">复制</button>
             </div>
-            <pre><code># Linux / macOS / WSL
+            <pre><code>npm i -g @anthropic-ai/claude-code</code></pre>
+            <details class="note" style="margin: 0 14px 14px;">
+              <summary>其他安装方式</summary>
+              <pre style="margin-top: 10px;"><code># Linux / macOS / WSL
 curl -fsSL https://claude.ai/install.sh | bash
 
 # Windows PowerShell
-irm https://claude.ai/install.ps1 | iex
-
-# 也可以用 npm 安装
-npm i -g @anthropic-ai/claude-code</code></pre>
+irm https://claude.ai/install.ps1 | iex</code></pre>
+            </details>
           </article>
 
           <article class="box">
             <div class="box-head">
               <div class="box-title">
-                <strong>Codex / OpenClaw</strong>
-                <span>npm 安装，OpenClaw 安装后配置</span>
+                <strong>Codex</strong>
+                <span>npm 安装</span>
               </div>
               <button class="copy" type="button">复制</button>
             </div>
-            <pre><code>npm i -g @openai/codex
-npm install -g openclaw@latest
+            <pre><code>npm i -g @openai/codex</code></pre>
+          </article>
 
-# OpenClaw 配置
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong>OpenClaw</strong>
+                <span>安装和配置</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>npm install -g openclaw@latest
 openclaw onboard --install-daemon
 openclaw config
-
-codex --version
 openclaw --version</code></pre>
           </article>
         </div>
@@ -333,14 +348,14 @@ openclaw --version</code></pre>
 
       <section id="config">
         <h2>3. 配置样例</h2>
-        <p>Claude Code 和 Codex 的常用配置示例。</p>
+        <p>Claude Code 和 Codex 的常用配置示例。Codex 这里拆成 `auth.json` 和 `config.toml` 两个文件。</p>
 
         <div class="grid">
           <article class="box">
             <div class="box-head">
               <div class="box-title">
                 <strong>Claude Code settings.json</strong>
-                <span>放到 Claude 配置目录</span>
+                <span>放到 <code>~/.claude</code></span>
               </div>
               <button class="copy" type="button">复制</button>
             </div>
@@ -371,15 +386,37 @@ openclaw --version</code></pre>
 }</code></pre>
           </article>
 
-          <article class="box">
+          <article class="box full">
             <div class="box-head">
               <div class="box-title">
-                <strong>Codex config.toml</strong>
-                <span>来自本地 codex/config.toml，已脱敏</span>
+                <strong>Codex</strong>
+                <span>auth.json 和 config.toml</span>
               </div>
-              <button class="copy" type="button">复制</button>
             </div>
-            <pre><code>personality = "pragmatic"
+
+            <div class="grid" style="margin-top: 14px;">
+              <article class="box">
+                <div class="box-head">
+                  <div class="box-title">
+                    <strong>auth.json</strong>
+                    <span>放到 <code>~/.codex</code></span>
+                  </div>
+                  <button class="copy" type="button">复制</button>
+                </div>
+                <pre><code>{
+  "OPENAI_API_KEY": "sk-****"
+}</code></pre>
+              </article>
+
+              <article class="box">
+                <div class="box-head">
+                  <div class="box-title">
+                    <strong>config.toml</strong>
+                    <span>放到 <code>~/.codex</code></span>
+                  </div>
+                  <button class="copy" type="button">复制</button>
+                </div>
+                <pre><code>personality = "pragmatic"
 model = "gpt-5.5"
 model_reasoning_effort = "high"
 model_provider = "awe"
@@ -395,25 +432,8 @@ requires_openai_auth = true
 
 [notice]
 hide_full_access_warning = true</code></pre>
-          </article>
-
-          <article class="box full">
-            <div class="box-head">
-              <div class="box-title">
-                <strong>危险模式 / YOLO</strong>
-                <span>只在可信目录或隔离环境使用</span>
-              </div>
-              <button class="copy" type="button">复制</button>
+              </article>
             </div>
-            <pre><code># Claude Code 跳过权限确认
-claude --dangerously-skip-permissions
-
-# Codex 临时跳过确认和沙箱
-codex --dangerously-bypass-approvals-and-sandbox
-
-# Codex 写进 config.toml 的等效配置
-approval_policy = "never"
-sandbox_mode = "danger-full-access"</code></pre>
           </article>
         </div>
       </section>

@@ -40,3 +40,13 @@ npm install -g openclaw@latest
 配置 OpenClaw
 openclaw onboard --install-daemon
 openclaw config
+
+Windows PowerShell 如果提示脚本执行被禁止，先运行：
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+然后再执行：
+npm config set registry https://registry.npmmirror.com
+node -v
+npm -v
+git --version
