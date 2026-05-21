@@ -474,7 +474,8 @@ hide_full_access_warning = true</code></pre>
     document.querySelectorAll(".copy").forEach((button) => {
       button.addEventListener("click", async () => {
         const box = button.closest(".box");
-        const code = box.querySelector("code").innerText;
+        const codeBlock = box.querySelector("pre code");
+        const code = codeBlock ? codeBlock.innerText : "";
         await copyText(code);
         button.textContent = "已复制";
         button.classList.add("done");
