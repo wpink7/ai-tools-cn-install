@@ -25,3 +25,5 @@ Install-ConfigFile "$RootDir\codex\auth.json" "$HOME\.codex\auth.json"
 Install-ConfigFile "$RootDir\codex\config.toml" "$HOME\.codex\config.toml"
 
 Write-Host "Done. Edit ~/.claude/settings.json and ~/.codex/auth.json with your own tokens."
+Write-Host "Press Enter to close this window."
+Read-Host | Out-Null
