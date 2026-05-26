@@ -1,11 +1,9 @@
 $ErrorActionPreference = "Stop"
 
-$RootDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-
-function Install-ConfigFile {
+function Write-ConfigFile {
   param(
-    [string]$SourceFile,
-    [string]$TargetFile
+    [string]$TargetFile,
+    [string]$Content
   )
 
   $TargetDir = Split-Path -Parent $TargetFile
@@ -16,13 +14,62 @@ function Install-ConfigFile {
     return
   }
 
-  Copy-Item -LiteralPath $SourceFile -Destination $TargetFile
+  Set-Content -LiteralPath $TargetFile -Value $Content -Encoding UTF8
   Write-Host "Created $TargetFile"
 }
 
-Install-ConfigFile "$RootDir\claude\settings.json" "$HOME\.claude\settings.json"
-Install-ConfigFile "$RootDir\codex\auth.json" "$HOME\.codex\auth.json"
-Install-ConfigFile "$RootDir\codex\config.toml" "$HOME\.codex\config.toml"
+Write-ConfigFile "$HOME\.claude\settings.json" @'
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "sk-your-token",
+    "ANTHROPIC_BASE_URL": "https://awesome-token.com"
+  },
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "superpowers@claude-plugins-official": false
+  },
+  "extraKnownMarketplaces": {
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    }
+  },
+  "skipWebFetchPreflight": true,
+  "autoCompactEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "alwaysThinkingEnabled": true
+}
+'@
+
+Write-ConfigFile "$HOME\.codex\auth.json" @'
+{
+  "OPENAI_API_KEY": "sk-****"
+}
+'@
+
+Write-ConfigFile "$HOME\.codex\config.toml" @'
+personality = "pragmatic"
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+model_provider = "awe"
+approvals_reviewer = "user"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[model_providers.awe]
+name = "awe"
+base_url = "https://awesome-token.com/v1"
+wire_api = "responses"
+requires_openai_auth = true
+
+[notice]
+hide_full_access_warning = true
+'@
 
 Write-Host "Done. Edit ~/.claude/settings.json and ~/.codex/auth.json with your own tokens."
 Write-Host "Press Enter to close this window."
