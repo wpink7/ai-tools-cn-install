@@ -354,6 +354,28 @@ openclaw --version</code></pre>
           <article class="box">
             <div class="box-head">
               <div class="box-title">
+                <strong><a href="setup-configs.sh" download>setup-configs.sh</a></strong>
+                <span>Linux / macOS / WSL，不覆盖已有文件</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>bash setup-configs.sh</code></pre>
+          </article>
+
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
+                <strong><a href="setup-configs.ps1" download>setup-configs.ps1</a></strong>
+                <span>Windows PowerShell，不覆盖已有文件</span>
+              </div>
+              <button class="copy" type="button">复制</button>
+            </div>
+            <pre><code>.\setup-configs.ps1</code></pre>
+          </article>
+
+          <article class="box">
+            <div class="box-head">
+              <div class="box-title">
                 <strong>Claude Code settings.json</strong>
                 <span>放到 <code>~/.claude</code></span>
               </div>
@@ -473,8 +495,8 @@ hide_full_access_warning = true</code></pre>
 
     document.querySelectorAll(".copy").forEach((button) => {
       button.addEventListener("click", async () => {
-        const box = button.closest(".box");
-        const codeBlock = box.querySelector("pre code");
+        const head = button.closest(".box-head");
+        const codeBlock = head ? head.nextElementSibling?.querySelector("code") : null;
         const code = codeBlock ? codeBlock.innerText : "";
         await copyText(code);
         button.textContent = "已复制";
