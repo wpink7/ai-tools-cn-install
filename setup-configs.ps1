@@ -1,4 +1,13 @@
+param(
+  [switch]$Force
+)
+
 $ErrorActionPreference = "Stop"
+
+$UserHome = [Environment]::GetFolderPath("UserProfile")
+if ([string]::IsNullOrWhiteSpace($UserHome)) {
+  throw "Could not resolve user profile directory."
+}
 
 function Write-ConfigFile {
   param(
@@ -7,18 +16,31 @@ function Write-ConfigFile {
   )
 
   $TargetDir = Split-Path -Parent $TargetFile
-  New-Item -ItemType Directory -Force -Path $TargetDir | Out-Null
+  if (-not (Test-Path -LiteralPath $TargetDir)) {
+    New-Item -ItemType Directory -Force -Path $TargetDir | Out-Null
+    Write-Host "Created directory $TargetDir"
+  }
 
-  if (Test-Path -LiteralPath $TargetFile) {
+  if ((Test-Path -LiteralPath $TargetFile) -and -not $Force) {
     Write-Host "Skip existing $TargetFile"
     return
   }
 
-  Set-Content -LiteralPath $TargetFile -Value $Content -Encoding UTF8
-  Write-Host "Created $TargetFile"
+  $Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+  [System.IO.File]::WriteAllText($TargetFile, $Content, $Utf8NoBom)
+
+  if ($Force) {
+    Write-Host "Wrote $TargetFile"
+  } else {
+    Write-Host "Created $TargetFile"
+  }
 }
 
-Write-ConfigFile "$HOME\.claude\settings.json" @'
+$ClaudeDir = Join-Path $UserHome ".claude"
+$CodexDir = Join-Path $UserHome ".codex"
+
+try {
+  Write-ConfigFile (Join-Path $ClaudeDir "settings.json") @'
 {
   "env": {
     "ANTHROPIC_AUTH_TOKEN": "sk-your-token",
@@ -46,13 +68,13 @@ Write-ConfigFile "$HOME\.claude\settings.json" @'
 }
 '@
 
-Write-ConfigFile "$HOME\.codex\auth.json" @'
+  Write-ConfigFile (Join-Path $CodexDir "auth.json") @'
 {
   "OPENAI_API_KEY": "sk-****"
 }
 '@
 
-Write-ConfigFile "$HOME\.codex\config.toml" @'
+  Write-ConfigFile (Join-Path $CodexDir "config.toml") @'
 personality = "pragmatic"
 model = "gpt-5.5"
 model_reasoning_effort = "high"
@@ -71,6 +93,8 @@ requires_openai_auth = true
 hide_full_access_warning = true
 '@
 
-Write-Host "Done. Edit ~/.claude/settings.json and ~/.codex/auth.json with your own tokens."
-Write-Host "Press Enter to close this window."
-Read-Host | Out-Null
+  Write-Host "Done. Edit ~/.claude/settings.json and ~/.codex/auth.json with your own tokens."
+} finally {
+  Write-Host "Press Enter to close this window."
+  Read-Host | Out-Null
+}

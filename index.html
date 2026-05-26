@@ -370,7 +370,10 @@ openclaw --version</code></pre>
               </div>
               <button class="copy" type="button">复制</button>
             </div>
-            <pre><code>powershell -ExecutionPolicy Bypass -File .\setup-configs.ps1</code></pre>
+            <pre><code>powershell -ExecutionPolicy Bypass -File .\setup-configs.ps1
+
+# 如果之前生成过错误文件，需要重写
+powershell -ExecutionPolicy Bypass -File .\setup-configs.ps1 -Force</code></pre>
           </article>
 
           <article class="box">
